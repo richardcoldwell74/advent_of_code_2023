@@ -8,7 +8,7 @@ const getInput = (): string[] => TestInput.split("\n").map(String);
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div>Day 02</div>
+      <div>Day 01</div>
       <div>Part A = {PartA(getInput())}</div>
       <div>Part B = {PartB(getInput())}</div>
     </main>
