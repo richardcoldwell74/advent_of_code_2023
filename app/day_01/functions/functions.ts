@@ -2,11 +2,10 @@ export const PartA = (inputArray: string[]): number => {
   let total = 0;
   inputArray.forEach((line) => {
     let justNumbers = line.replace(/[^0-9]/g, "");
-    if (justNumbers) {
-      justNumbers.length === 1
-        ? (total += +(justNumbers[0] + justNumbers[0]))
-        : (total += +(justNumbers[0] + justNumbers[justNumbers.length - 1]));
-    }
+    if (justNumbers.length === 0) return;
+    justNumbers.length === 1
+      ? (total += +(justNumbers[0] + justNumbers[0]))
+      : (total += +(justNumbers[0] + justNumbers[justNumbers.length - 1]));
   });
 
   return total;
@@ -32,11 +31,11 @@ export const PartB = (inputArray: string[]): number => {
       })
       .join("")
       .replace(/[^0-9]/g, "");
-    if (justNumbers) {
-      justNumbers.length === 1
-        ? (total += +(justNumbers[0] + justNumbers[0]))
-        : (total += +(justNumbers[0] + justNumbers[justNumbers.length - 1]));
-    }
+
+    if (justNumbers.length === 0) return;
+    justNumbers.length === 1
+      ? (total += +(justNumbers[0] + justNumbers[0]))
+      : (total += +(justNumbers[0] + justNumbers[justNumbers.length - 1]));
   });
 
   return total;
