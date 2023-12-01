@@ -15,7 +15,7 @@ export const PartA = (inputArray: string[]): number => {
 export const PartB = (inputArray: string[]): number => {
   let total = 0;
   inputArray.forEach((line) => {
-    const wordsChecked = line
+    const justNumbers = line
       .split("")
       .map((char, index) => {
         const current = line.slice(index);
@@ -30,8 +30,8 @@ export const PartB = (inputArray: string[]): number => {
         if (current.startsWith("nine")) return "9";
         return char;
       })
-      .join("");
-    let justNumbers = wordsChecked.replace(/[^0-9]/g, "");
+      .join("")
+      .replace(/[^0-9]/g, "");
     if (justNumbers) {
       justNumbers.length === 1
         ? (total += +(justNumbers[0] + justNumbers[0]))
