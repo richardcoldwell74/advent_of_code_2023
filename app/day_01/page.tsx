@@ -1,9 +1,9 @@
 import { PartA, PartB } from "./functions/functions";
 import styles from "./page.module.css";
 
-import { TestInput, Input } from "./input/input";
+import { TestInput, TestInputTwo, Input } from "./input/input";
 
-const getInput = (): string[] => TestInput.split("\n").map(String);
+const getInput = (): string[] => Input.split("\n").map(String);
 
 export default function Home() {
   return (
