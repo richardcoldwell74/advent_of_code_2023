@@ -4,17 +4,18 @@ type Card = {
   yourNumbers: number[];
   yourWinningNumbers: number[];
   totalPoints: number;
+  numberOfThisTicket: number;
 };
 
-export const PartA = (inputArray: string[]): number => {
-  console.log("inputArray", inputArray);
+export type ReturnValues = { partA: number; partB: number };
+
+export const Solutions = (inputArray: string[]): ReturnValues => {
   let total = 0;
+  let totalTwo = 0;
   let CardData: Card[] = [];
   inputArray.forEach((card) => {
     const currentCardId = card.substring(card.indexOf(" "), card.indexOf(":"));
-    console.log("card", card);
     let cardNoRemoved = card.slice(card.indexOf(":") + 1);
-    console.log("cardNoRemoved", cardNoRemoved);
     let winning = cardNoRemoved
       .substring(0, cardNoRemoved.indexOf("|"))
       .trim()
@@ -34,7 +35,6 @@ export const PartA = (inputArray: string[]): number => {
     const yourRemoveZeros = yourNums.filter(function (a) {
       return a !== 0;
     });
-    console.log("yourNums", yourNums);
 
     CardData.push({
       cardId: +currentCardId,
@@ -42,6 +42,7 @@ export const PartA = (inputArray: string[]): number => {
       yourNumbers: yourRemoveZeros,
       yourWinningNumbers: [],
       totalPoints: 0,
+      numberOfThisTicket: 1,
     });
   });
 
@@ -61,13 +62,36 @@ export const PartA = (inputArray: string[]): number => {
     card.totalPoints = score;
     total += score;
   });
-  console.log("CardData", CardData);
 
-  return total;
-};
+  for (let index = 0; index < CardData.length; index++) {
+    // CardData.forEach((card, index) => {
+    // count number of winninhg numbers and
+    // card.yourWinningNumbers.length
+    // console.log("card.numberOfThisTicket", CardData[index].numberOfThisTicket);
+    for (
+      let noOfTickets = 0;
+      noOfTickets < CardData[index].numberOfThisTicket;
+      noOfTickets++
+    ) {
+      if (CardData[index].yourWinningNumbers.length > 0) {
+        for (
+          let winCount = 0;
+          winCount < CardData[index].yourWinningNumbers.length;
+          winCount++
+        ) {
+          // console.log("index ", index, " winCount +1 ", winCount + 1);
+          CardData[index + winCount + 1].numberOfThisTicket += 1;
+          // numbers.push(CardData[index].cardId + winCount + 1);
+        }
+      }
+    }
+  }
 
-export const PartB = (inputArray: string[]): number => {
-  let total = 0;
+  // console.log("CardData", CardData);
 
-  return total;
+  CardData.forEach((card) => {
+    totalTwo += card.numberOfThisTicket;
+  });
+
+  return { partA: total, partB: totalTwo };
 };
