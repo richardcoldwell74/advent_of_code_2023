@@ -1,4 +1,4 @@
-import { Solutions } from "./functions/functions";
+import { Solutions, SolutionsB } from "./functions/functions";
 import styles from "./page.module.css";
 
 import { TestInput, Input } from "./input/input";
@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div>Day 05</div>
-      <div>Part A = {Solutions(getInput()).partA}</div>
-      <div>Part B = {Solutions(getInput()).partB}</div>
+      {/* <div>Part A = {Solutions(getInput()).partA}</div> */}
+      <div>Part B = {SolutionsB(getInput()).partB}</div>
     </main>
   );
 }
