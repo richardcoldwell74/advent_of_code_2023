@@ -1,11 +1,5 @@
 export type ReturnValues = { partA: number; partB: number };
 
-// export const InitializeMap = (map: Map<string, string>) => {
-//   // for (let index = 0; index < 100; index++) {
-//   //   map.set(index.toString(), index.toString());
-//   // }
-// };
-
 type MapObject = {
   source: number;
   destination: number;
@@ -240,29 +234,6 @@ type seedMap = {
   length: number;
 };
 export const SolutionsB = (inputArray: string[]): ReturnValues => {
-  const arrayOfMinNumbersManual: number[] = [
-    2509416930, 1339903174, 77781697, 296767779, 555467313, 524321155,
-    3794392721, 3851826931, 278431577, 299324488, 1825631461, 187991300,
-    230668725, 59370573, 2771791393, 166973311, 2886036244, 2646025192,
-    2886036244, 856589248, 1322210923,
-  ];
-
-  // index 0 = 2509416930
-  // index 1 = 1339903174
-  // index 2 = 77781697, 296767779, 555467313
-  // index 3 = 524321155, 3794392721, 3851826931
-  // index 4 = 278431577
-  // index 5 = 299324488, 1825631461, 187991300, 230668725,59370573, 2771791393
-  // index 6 = 166973311,
-  // index 7 = 2646025192
-  // index 8 = 2886036244, 856589248
-  // index 9 = 1322210923
-
-  arrayOfMinNumbersManual.sort(function (a, b) {
-    return a - b;
-  });
-  console.log("arrayOfMinNumbersManual", arrayOfMinNumbersManual);
-
   let partA = 0;
   let partB = 0;
   let tempArray: string[][] = [];
@@ -276,7 +247,7 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
     }
   });
 
-  // console.log("inputArray", inputArray);
+  // console.log("tempArray", tempArray);
 
   // Get Array of seed numbers
   const tempSeedNumbers: number[] = tempArray[0][0]
@@ -295,25 +266,6 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
       }
     }
   });
-  console.log("tempSeedNumbers", tempSeedNumbers);
-  console.log("seedMap", seedMap);
-  // const newSeedNumbers: number[] = [79, 14, 55, 13];
-  const newSeedNumbers: number[] = [];
-
-  // seedMap.forEach((map) => {
-  // let tempStart = seedMap[2].start;
-  let tempStart = 3591380151;
-
-  // for (let index = 0; index < seedMap[7].length; index++) {
-  for (let index = 0; index < 78996923; index++) {
-    newSeedNumbers.push(tempStart);
-    tempStart++;
-  }
-  // });
-  // console.log("line 296 - newSeedNumbers", newSeedNumbers);
-  // while(seedMap[0].length) {
-  //     console.log(seedMap[0].splice(0,10));
-  // }
 
   // SET UP MAP OBJECTS
   //Seed To Soil V2
@@ -322,8 +274,8 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
   seedToSoil.forEach((section) => {
     const temp = section.split(" ");
     seedToSoilMapObject.push({
-      source: +temp[1],
-      destination: +temp[0],
+      source: +temp[0],
+      destination: +temp[1],
       length: +temp[2],
     });
   });
@@ -334,8 +286,8 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
   soilToFertilizer.forEach((section) => {
     const temp = section.split(" ");
     soilToFertilizerMapObject.push({
-      source: +temp[1],
-      destination: +temp[0],
+      source: +temp[0],
+      destination: +temp[1],
       length: +temp[2],
     });
   });
@@ -346,8 +298,8 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
   fertilizerToWater.forEach((section) => {
     const temp = section.split(" ");
     fertilizerToWaterMapObject.push({
-      source: +temp[1],
-      destination: +temp[0],
+      source: +temp[0],
+      destination: +temp[1],
       length: +temp[2],
     });
   });
@@ -358,8 +310,8 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
   WaterToLight.forEach((section) => {
     const temp = section.split(" ");
     waterToLightMapObject.push({
-      source: +temp[1],
-      destination: +temp[0],
+      source: +temp[0],
+      destination: +temp[1],
       length: +temp[2],
     });
   });
@@ -370,8 +322,8 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
   lightToTemperature.forEach((section) => {
     const temp = section.split(" ");
     lightToTemperatureMapObject.push({
-      source: +temp[1],
-      destination: +temp[0],
+      source: +temp[0],
+      destination: +temp[1],
       length: +temp[2],
     });
   });
@@ -382,8 +334,8 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
   temperatureToHumidity.forEach((section) => {
     const temp = section.split(" ");
     temperatureToHumidityMapObject.push({
-      source: +temp[1],
-      destination: +temp[0],
+      source: +temp[0],
+      destination: +temp[1],
       length: +temp[2],
     });
   });
@@ -394,8 +346,8 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
   humidityToLocation.forEach((section) => {
     const temp = section.split(" ");
     humidityToLocationMapObject.push({
-      source: +temp[1],
-      destination: +temp[0],
+      source: +temp[0],
+      destination: +temp[1],
       length: +temp[2],
     });
   });
@@ -404,130 +356,264 @@ export const SolutionsB = (inputArray: string[]): ReturnValues => {
 
   //seedNunbersFinal
 
-  newSeedNumbers.forEach((seedNumber, index) => {
-    //Seed To Soil V2
-    // console.log("seedNumber", seedNumber);
-    for (const seedToSoilMap of seedToSoilMapObject) {
-      if (
-        newSeedNumbers[index] >= seedToSoilMap.source &&
-        newSeedNumbers[index] <= seedToSoilMap.source + seedToSoilMap.length
-      ) {
-        const diff = seedToSoilMap.destination - seedToSoilMap.source;
+  // newSeedNumbers.forEach((seedNumber, index) => {
+  //   //Seed To Soil V2
+  //   // console.log("seedNumber", seedNumber);
+  //   for (const seedToSoilMap of seedToSoilMapObject) {
+  //     if (
+  //       newSeedNumbers[index] >= seedToSoilMap.source &&
+  //       newSeedNumbers[index] <= seedToSoilMap.source + seedToSoilMap.length
+  //     ) {
+  //       const diff = seedToSoilMap.destination - seedToSoilMap.source;
 
-        // seedNunbersFinal.push(seedNumber + diff);
-        newSeedNumbers[index] = newSeedNumbers[index] + diff;
-        break;
-      }
-    }
+  //       // seedNunbersFinal.push(seedNumber + diff);
+  //       newSeedNumbers[index] = newSeedNumbers[index] + diff;
+  //       break;
+  //     }
+  //   }
 
-    // // soil To fertilizer V2
-    for (const soilToFertilizerMap of soilToFertilizerMapObject) {
+  //   // // soil To fertilizer V2
+  //   for (const soilToFertilizerMap of soilToFertilizerMapObject) {
+  //     if (
+  //       newSeedNumbers[index] >= soilToFertilizerMap.source &&
+  //       newSeedNumbers[index] <=
+  //         soilToFertilizerMap.source + soilToFertilizerMap.length
+  //     ) {
+  //       const diff =
+  //         soilToFertilizerMap.destination - soilToFertilizerMap.source;
+  //       // seedNunbersFinal.push(seedNumber + diff);
+  //       newSeedNumbers[index] = newSeedNumbers[index] + diff;
+  //       break;
+  //     }
+  //   }
+
+  //   // // fertilizer to water V2
+  //   for (const fertilizerToWaterMap of fertilizerToWaterMapObject) {
+  //     if (
+  //       newSeedNumbers[index] >= fertilizerToWaterMap.source &&
+  //       newSeedNumbers[index] <=
+  //         fertilizerToWaterMap.source + fertilizerToWaterMap.length
+  //     ) {
+  //       const diff =
+  //         fertilizerToWaterMap.destination - fertilizerToWaterMap.source;
+  //       // seedNunbersFinal.push(seedNumber + diff);
+  //       newSeedNumbers[index] = newSeedNumbers[index] + diff;
+
+  //       break;
+  //     }
+  //   }
+
+  //   // //  water to light V2
+  //   for (const waterToLightMap of waterToLightMapObject) {
+  //     if (
+  //       newSeedNumbers[index] >= waterToLightMap.source &&
+  //       newSeedNumbers[index] <= waterToLightMap.source + waterToLightMap.length
+  //     ) {
+  //       const diff = waterToLightMap.destination - waterToLightMap.source;
+  //       // seedNunbersFinal.push(seedNumber + diff);
+  //       newSeedNumbers[index] = newSeedNumbers[index] + diff;
+  //       break;
+  //     }
+  //   }
+
+  //   //  Light to Temperature V2
+
+  //   for (const lightToTemperatureMap of lightToTemperatureMapObject) {
+  //     if (
+  //       newSeedNumbers[index] >= lightToTemperatureMap.source &&
+  //       newSeedNumbers[index] <=
+  //         lightToTemperatureMap.source + lightToTemperatureMap.length
+  //     ) {
+  //       const diff =
+  //         lightToTemperatureMap.destination - lightToTemperatureMap.source;
+  //       newSeedNumbers[index] = newSeedNumbers[index] + diff;
+  //       break;
+  //     }
+  //   }
+
+  //   // //  Temperature to Humidity V2
+  //   for (const temperatureToHumidityMap of temperatureToHumidityMapObject) {
+  //     if (
+  //       newSeedNumbers[index] >= temperatureToHumidityMap.source &&
+  //       newSeedNumbers[index] <=
+  //         temperatureToHumidityMap.source + temperatureToHumidityMap.length
+  //     ) {
+  //       const diff =
+  //         temperatureToHumidityMap.destination -
+  //         temperatureToHumidityMap.source;
+  //       // seedNunbersFinal.push(seedNumber + diff);
+  //       newSeedNumbers[index] = newSeedNumbers[index] + diff;
+  //       break;
+  //     }
+  //   }
+
+  //   // //  Humidity to Location V2
+  //   for (const humidityToLocationMap of humidityToLocationMapObject) {
+  //     if (
+  //       newSeedNumbers[index] >= humidityToLocationMap.source &&
+  //       newSeedNumbers[index] <=
+  //         humidityToLocationMap.source + humidityToLocationMap.length
+  //     ) {
+  //       const diff =
+  //         humidityToLocationMap.destination - humidityToLocationMap.source;
+  //       // seedNunbersFinal.push(seedNumber + diff);
+  //       newSeedNumbers[index] = newSeedNumbers[index] + diff;
+  //       break;
+  //     }
+  //   }
+  // });
+
+  // ****   REVERSE LOGIC TEST  ****
+
+  let currentLocation = 0;
+  let currentHumidity = 0;
+  let currentTemperature = 0;
+  let currentLight = 0;
+  let currentWater = 0;
+  let currentFertilizer = 0;
+  let currentSoil = 0;
+  let currentSeed = 0;
+
+  let loop = true;
+
+  while (loop) {
+    // console.log("currentLocation ", currentLocation);
+
+    // if (currentLocation >= 100) loop = false;
+
+    // //  Location to Humidity V2
+    for (const humidityToLocationMap of humidityToLocationMapObject) {
       if (
-        newSeedNumbers[index] >= soilToFertilizerMap.source &&
-        newSeedNumbers[index] <=
-          soilToFertilizerMap.source + soilToFertilizerMap.length
+        currentLocation >= humidityToLocationMap.source &&
+        currentLocation <=
+          humidityToLocationMap.source + humidityToLocationMap.length
       ) {
         const diff =
-          soilToFertilizerMap.destination - soilToFertilizerMap.source;
-        // seedNunbersFinal.push(seedNumber + diff);
-        newSeedNumbers[index] = newSeedNumbers[index] + diff;
+          humidityToLocationMap.destination - humidityToLocationMap.source;
+        currentHumidity = currentLocation + diff;
         break;
+      } else {
+        currentHumidity = currentLocation;
       }
     }
 
-    // // fertilizer to water V2
-    for (const fertilizerToWaterMap of fertilizerToWaterMapObject) {
-      if (
-        newSeedNumbers[index] >= fertilizerToWaterMap.source &&
-        newSeedNumbers[index] <=
-          fertilizerToWaterMap.source + fertilizerToWaterMap.length
-      ) {
-        const diff =
-          fertilizerToWaterMap.destination - fertilizerToWaterMap.source;
-        // seedNunbersFinal.push(seedNumber + diff);
-        newSeedNumbers[index] = newSeedNumbers[index] + diff;
-
-        break;
-      }
-    }
-
-    // //  water to light V2
-    for (const waterToLightMap of waterToLightMapObject) {
-      if (
-        newSeedNumbers[index] >= waterToLightMap.source &&
-        newSeedNumbers[index] <= waterToLightMap.source + waterToLightMap.length
-      ) {
-        const diff = waterToLightMap.destination - waterToLightMap.source;
-        // seedNunbersFinal.push(seedNumber + diff);
-        newSeedNumbers[index] = newSeedNumbers[index] + diff;
-        break;
-      }
-    }
-
-    //  Light to Temperature V2
-
-    for (const lightToTemperatureMap of lightToTemperatureMapObject) {
-      if (
-        newSeedNumbers[index] >= lightToTemperatureMap.source &&
-        newSeedNumbers[index] <=
-          lightToTemperatureMap.source + lightToTemperatureMap.length
-      ) {
-        const diff =
-          lightToTemperatureMap.destination - lightToTemperatureMap.source;
-        newSeedNumbers[index] = newSeedNumbers[index] + diff;
-        break;
-      }
-    }
-
-    // //  Temperature to Humidity V2
+    //   // //  Humidity to Temperature V2
     for (const temperatureToHumidityMap of temperatureToHumidityMapObject) {
       if (
-        newSeedNumbers[index] >= temperatureToHumidityMap.source &&
-        newSeedNumbers[index] <=
+        currentHumidity >= temperatureToHumidityMap.source &&
+        currentHumidity <=
           temperatureToHumidityMap.source + temperatureToHumidityMap.length
       ) {
         const diff =
           temperatureToHumidityMap.destination -
           temperatureToHumidityMap.source;
-        // seedNunbersFinal.push(seedNumber + diff);
-        newSeedNumbers[index] = newSeedNumbers[index] + diff;
+        currentTemperature = currentHumidity + diff;
         break;
+      } else {
+        currentTemperature = currentHumidity;
       }
     }
 
-    // //  Humidity to Location V2
-    for (const humidityToLocationMap of humidityToLocationMapObject) {
+    //  Temperature to Light V2
+    for (const lightToTemperatureMap of lightToTemperatureMapObject) {
       if (
-        newSeedNumbers[index] >= humidityToLocationMap.source &&
-        newSeedNumbers[index] <=
-          humidityToLocationMap.source + humidityToLocationMap.length
+        currentTemperature >= lightToTemperatureMap.source &&
+        currentTemperature <=
+          lightToTemperatureMap.source + lightToTemperatureMap.length
       ) {
         const diff =
-          humidityToLocationMap.destination - humidityToLocationMap.source;
-        // seedNunbersFinal.push(seedNumber + diff);
-        newSeedNumbers[index] = newSeedNumbers[index] + diff;
+          lightToTemperatureMap.destination - lightToTemperatureMap.source;
+        currentLight = currentTemperature + diff;
         break;
+      } else {
+        currentLight = currentTemperature;
       }
     }
-  });
 
-  // console.log("seedNumbersFinal", seedNunbersFinal);
-  // partB = Math.min(...newSeedNumbers);
-  // console.log("min", partB);
+    // light to water V2
+    for (const waterToLightMap of waterToLightMapObject) {
+      if (
+        currentLight >= waterToLightMap.source &&
+        currentLight <= waterToLightMap.source + waterToLightMap.length
+      ) {
+        const diff = waterToLightMap.destination - waterToLightMap.source;
+        currentWater = currentLight + diff;
+        break;
+      } else {
+        currentWater = currentLight;
+      }
+    }
 
-  newSeedNumbers.sort(function (a, b) {
-    return a - b;
-  });
-  // const forNow = newSeedNumbers.slice(0, 2000000);
-  // const newMin = Math.min(...forNow);
-  console.log("new min", newSeedNumbers[0]);
+    // water to fertilizer  V2
+    for (const fertilizerToWaterMap of fertilizerToWaterMapObject) {
+      if (
+        currentWater >= fertilizerToWaterMap.source &&
+        currentWater <=
+          fertilizerToWaterMap.source + fertilizerToWaterMap.length
+      ) {
+        const diff =
+          fertilizerToWaterMap.destination - fertilizerToWaterMap.source;
+        currentFertilizer = currentWater + diff;
+        break;
+      } else {
+        currentFertilizer = currentWater;
+      }
+    }
 
-  // const arrayOfMinNumbersManual: number[] = [2509416930, 1339903174, 278431577, 2646025192];
+    // fertilizer to soil V
+    for (const soilToFertilizerMap of soilToFertilizerMapObject) {
+      if (
+        currentFertilizer >= soilToFertilizerMap.source &&
+        currentFertilizer <=
+          soilToFertilizerMap.source + soilToFertilizerMap.length
+      ) {
+        const diff =
+          soilToFertilizerMap.destination - soilToFertilizerMap.source;
+        currentSoil = currentFertilizer + diff;
+        break;
+      } else {
+        currentSoil = currentFertilizer;
+      }
+    }
 
-  // arrayOfMinNumbersManual.sort(function (a, b) {
+    // //  Soil  to seed V2
+    for (const seedToSoilMap of seedToSoilMapObject) {
+      if (
+        currentSoil >= seedToSoilMap.source &&
+        currentSoil <= seedToSoilMap.source + seedToSoilMap.length
+      ) {
+        const diff = seedToSoilMap.destination - seedToSoilMap.source;
+        currentSeed = currentSoil + diff;
+        break;
+      } else {
+        currentSeed = currentSoil;
+      }
+    }
+
+    // console.log("****** ");
+    // console.log("currentLocation ", currentLocation);
+
+    // console.log("currentSeed ", currentSeed);
+
+    seedMap.forEach((map) => {
+      if (currentSeed >= map.start && currentSeed < map.start + map.length) {
+        console.log("currentSeed ", currentSeed);
+        console.log("currentLocation ", currentLocation);
+        loop = false;
+      }
+    });
+
+    currentLocation++;
+  }
+
+  console.log("seedMap ", seedMap);
+  //******************************* */
+
+  // newSeedNumbers.sort(function (a, b) {
   //   return a - b;
   // });
-  // console.log('arrayOfMinNumbersManual',arrayOfMinNumbersManual)
+  // const forNow = ne.min(...forNow);
+  // console.log("new min", newSeedNumbers[0]);
 
   return { partA: partA, partB: partB };
 };
