@@ -1,9 +1,9 @@
 import { Solutions } from "./functions/functions";
 import styles from "./page.module.css";
 
-import { TestInput, Input } from "./input/input";
+import { TestInputOne, TestInputTwo, Input } from "./input/input";
 
-const getInput = (): string[] => TestInput.split("\n").map(String);
+const getInput = (): string[] => TestInputTwo.split("\n").map(String);
 
 export default function Home() {
   return (
