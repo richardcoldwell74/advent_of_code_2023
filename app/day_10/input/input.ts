@@ -1,4 +1,10 @@
-export const TestInput = `-L|F7
+export const TestInputOne = `.....
+.S-7.
+.|.|.
+.L-J.
+.....`;
+
+export const TestInputTwo = `-L|F7
 7S-7|
 L|7||
 -L-J|
